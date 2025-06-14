@@ -29,13 +29,32 @@
     // Array.prototype.some() // is at least one person 19 or older?
     // Array.prototype.every() // is everyone 19 or older?
 
+    const isAdult = people.some(person => (new Date()).getFullYear() - person.year >= 19); //(new Date()).getFullYear() returns current year we are in
+    console.log(isAdult);
+
+    const allAdults = people.every(person => (new Date()).getFullYear() - person.year >= 19); //every item must meet the criteria for .every only one for .some
+    console.log(allAdults);
+
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
 
+    const comment = comments.find(comment => comment.id === 823423);
+    console.log(comment);
+
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+
+    const deleteComment = comments.splice(comments.findIndex(comment => comment.id === 823423), 1); //splice removes the item from the original array
+    console.table(comments);
+
+    const newComments = [
+      ...comments.slice(0, comments.findIndex(comment => comment.id === 823423)), //slice creates a new array without modifying the original array. 
+      // To add two sliced arrays together you use the spread syntax (...) which aexpands an array
+      ...comments.slice(comments.findIndex(comment => comment.id === 823423) + 1)
+    ];
+    console.table(newComments);
 
   </script>
 </body>
